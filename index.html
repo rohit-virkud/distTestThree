@@ -134,7 +134,7 @@ body {
   font-size: min(3vw, 2vh);
   color: #000000;
   width: 60vw;
-  font-family: "Lato", sans-serif;
+ 
 }
 .contact-container {
   display: flex;
@@ -158,15 +158,10 @@ body {
   margin-bottom: min(13vw, 6.5vh);
 }
 .btn-outline {
-  width: min(40vw, 20vh);
-  height: 8%;
-  border: 1.5px solid #b30f18;
+  width: min(40vw, 25vh);
+  height: 8%; 
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-shrink: 0;
-  color: white;
-  font-size: min(3vw, 1.5vh);
+  
 }
 
 .primary-btn {
@@ -277,7 +272,7 @@ body {
         {
             position: fixed;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             overflow: hidden;
             background: url('shareIcon.png') no-repeat;
             background-size: cover;
@@ -469,11 +464,14 @@ body {
                     <p>Π.Ράλλη 37A, Ταύρος, 177-78 </p>
                    </a>
 
-                   <div class="btn-outline" data-swiper-parallax="-300">
+                   <!--<div class="btn-outline" data-swiper-parallax="-300">
                      <a href="#!" class="primary-btn">
                       SAVE MY CONTACTS
                      </a>  
-                   </div> 
+                   </div> -->
+                   <a href="#" data-swiper-parallax="-300">
+                    <img src="savebtn.png" class="btn-outline" />
+               </a> 
         
               </div> <!-- my container --->
               <img src="backarrow.png" alt="next-arrow-icon" data-nav="next" class="main-nav next  swiper-button-next next-icon"/>
@@ -766,7 +764,7 @@ body {
     imagesRatio: window.innerWidth / window.innerHeight,
     image1: `${bgImgs[0]}`,
     image2: `${bgImgs[1]}`,
-    displacementImage: "https://raw.githubusercontent.com/ShaifArfan/Displacement-images/main/Hover%20Effect%20-%20Robin%20Dela/16.jpg",
+    displacementImage: "mapt - 3.png",
     hover: false
   });
 
@@ -776,7 +774,7 @@ body {
     imagesRatio: 1080 / 1920,
     image1: `${bgImgs[1]}`,
     image2: `${bgImgs[2]}`,
-    displacementImage: "https://raw.githubusercontent.com/ShaifArfan/Displacement-images/main/Hover%20Effect%20-%20Robin%20Dela/16.jpg",
+    displacementImage: "mapt - 3.png",
     hover: false
   });
 
@@ -786,7 +784,7 @@ body {
     imagesRatio: 1080 / 1920,
     image1: `${bgImgs[2]}`,
     image2: `${bgImgs[0]}`,
-    displacementImage: "https://raw.githubusercontent.com/ShaifArfan/Displacement-images/main/Hover%20Effect%20-%20Robin%20Dela/16.jpg",
+    displacementImage: "mapt - 3.png",
     hover: false
   });
 ;
@@ -847,9 +845,70 @@ body {
   });
 
 
-  const t1 = new TimelineLite({paused:true});
-  const opShare = new TimelineLite({paused:true});
-  const clShare = new TimelineLite({paused:true});
+  const shareAnim = new TimelineLite({paused:true});
+  const closeAnim = new TimelineLite({paused:true})
+
+  shareAnim.to('.text-wrapper',0.5,{
+                opacity: 0,
+                x: -150,
+                ease: Power2.easeOut,
+            },'-= 2')
+            .to('.buttons-wrapper',0.5,{
+                opacity: 0,
+                x: -150,
+                ease: Power2.easeOut,
+            },'-= 2')
+            .to('.save-my-contact-btn',0.5,{
+                opacity: 0,
+                x: -150,
+                ease: Power2.easeOut,
+            },'-= 2')
+            .fromTo('.icon-grid',0.5,{
+                opacity: 0,
+                x: -150,
+                ease: Power2.easeOut,
+            },{
+                opacity: 1,
+                x: 0,
+            },'-= 1.5')
+            .fromTo('.share-headline',0.5,{
+                opacity: 0,
+                x: -150,
+                ease: Power2.easeOut,
+            },{
+                opacity: 1,
+                x: 0,
+            },'-= 1.5')
+            .fromTo('.qr-code-container',0.5,{
+                opacity: 0,
+                x: -160,
+                ease: Power2.easeOut,
+            },{
+                opacity: 1,
+                x: 0,
+            },'-= 1.5')
+            .fromTo('.scan-and-save-txt',0.5,{
+                opacity: 0,
+                x: -160,
+                ease: Power2.easeOut,
+            },{
+                opacity: 1,
+                x: 0,
+            },'-= 1.5')
+            
+
+  closeAnim.fromTo('.close-icon',0.5,{
+                rotationZ: "0",
+                ease: Power2.easeOut,
+            },{
+              rotationZ: "180",
+            })
+            
+                   
+
+
+  /*const t1 = new TimelineLite({paused:true});
+  
 
         t1.fromTo('.background',2,{
                 scale: 1.2,
@@ -882,22 +941,10 @@ body {
             },'-= 1.2')
 
 
-          /* opShare.fromTo('.share-slide',1,{
-                x: -500, 
-                ease: Power2.easeOut,
-            },{
-               x: 0,
-            },'0.5')
-
-            clShare.fromTo('.share-slide',1,{
-                x: 0, 
-                ease: Power2.easeOut,
-            },{
-               x: -500,
-            }) */
+         
             
             
-           t1.play(0);
+          /* t1.play(0);*/
 
 
 
@@ -906,7 +953,7 @@ body {
 
 
         swiper.on('slideChange', function(e){
-          t1.play(0);
+         /* t1.play(0);*/
           })
 
         
@@ -916,6 +963,7 @@ body {
         function openTheShare()
         { 
           $(".share-slide").addClass("open");
+          shareAnim.play(0);
         }
 
      
@@ -923,6 +971,7 @@ body {
         function closeTheShare()
         {
           $(".share-slide").removeClass("open");
+          closeAnim.play(0);
         }
 
  
