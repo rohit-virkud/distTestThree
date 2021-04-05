@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   
      
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script> 
 
   
     <!--<script src="./js/hover.js"></script>-->
@@ -378,6 +379,20 @@ body {
           
         }
 
+        .lottie-anim
+        {
+            position: fixed;
+            bottom: 1.5%;
+            /*left: min(8vw,5vh);*/
+            width: min(12vw,5vh);
+            height: min(12vw,5vh);
+        }
+        lottie-player
+        {
+            width:min(72.993vw,36vh);
+            height: min(72.993vw,36vh);
+        }
+
     </style>
   </head>
   <body>
@@ -413,6 +428,9 @@ body {
       <div class="swiper-container">
         <div class="swiper-wrapper">
           <div class="swiper-slide slide-01 noSwipingClass" id="s1">
+            <audio id="audio">
+              <source src="doc.mpeg" type="audio/mpeg">
+            </audio>
             <div class="my-wrapper">
                 <img src="share.png" class="share" onclick="openTheShare()"/>  
                 <div class="my-container">
@@ -471,7 +489,11 @@ body {
                    </div> -->
                    <a href="#" data-swiper-parallax="-300">
                     <img src="savebtn.png" class="btn-outline" />
-               </a> 
+               </a>
+               
+              <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_Sc0OC3.json"  
+              background="transparent"  speed="1"  class="lottie-anim"  onclick="play2()"   
+              loop  autoplay style="cursor: pointer;z-index: 999;"></lottie-player>
         
               </div> <!-- my container --->
               <img src="backarrow.png" alt="next-arrow-icon" data-nav="next" class="main-nav next  swiper-button-next next-icon"/>
@@ -973,6 +995,24 @@ body {
           $(".share-slide").removeClass("open");
           closeAnim.play(0);
         }
+
+
+    function play2() { 
+  
+        var audioElement = document.getElementById("audio");
+          
+        if (audioElement.paused) {
+                /* Audio link for notification */ 
+          audioElement.play(); 
+            
+        }
+        else {
+          
+            audioElement.pause(); 
+          
+        }
+
+    } 
 
  
 
