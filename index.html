@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Lato:wght@400;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   
+     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
 
   
     <!--<script src="./js/hover.js"></script>-->
@@ -270,18 +272,154 @@ body {
   font-size: min(3vw, 1.5vh);
 }
 
+ /*share slide*/
+ .share-slide
+        {
+            position: fixed;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            background: url('shareIcon.png') no-repeat;
+            background-size: cover;
+            background-position: center;
+            z-index: 22;
+            transform: translateX(-100%);
+            transition: transform 1s ease-in-out;
+         
+           
+         
+            
+            
+        }
+        .share-slide .close-icon
+        {
+            position: absolute;
+            top:6%;
+            right: 10%;
+            width: min(5vw,3vh);
+            height: min(5vw,3vh);
+        }
+        .share-slide-share-icons
+        {
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-shrink: 0;
+            position: fixed;
+            top: 50%;
+            left: 50%; 
+            /* bring your own prefixes */
+            transform: translate(-50%, -55%);
+           
+        }
+        .share-headline 
+        {
+            font-size: min(5vw,2.5vh);
+            color: white;
+            font-family: "Lato", sans-serif;
+             font-weight: 900;
+            margin-bottom:  min(4vw,3vh);
+
+            
+        }
+        .scan-and-save-txt
+        {
+            font-size: min(5vw,2.5vh);
+            color: white;
+            font-family: "Lato", sans-serif;
+             font-weight: 900;
+            margin-bottom:  min(4vw,4vh);
+            margin-top: 30%;
+        }
+
+
+        
+        .icon-grid
+        {
+            display: grid;
+            width: 100%;
+            grid-template-columns: 11vw 11vw 11vw 11vw;
+            grid-gap: min(2vw,1vh);
+            
+            justify-content: center;
+            
+        }
+        .icon-grid a
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .icon-grid img
+        {
+            width: min(11vw,5vh);
+            height: min(11vw,5vh);
+        }
+        
+        .qr-code-wrapper
+        {
+            width: 100%;
+            height: 50vh;
+            
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            color: white;
+            font-family: "Lato", sans-serif;
+             font-weight: 900;
+            align-items: center;
+        }
+        .qr-code-container img
+        { 
+            width: min(30vw,20vh);
+            height: min(30vw,20vh);
+           
+        }
+        .open
+        {
+          transform:  translateX(0);
+          
+        }
+
     </style>
   </head>
   <body>
     <section>
 
+    <!-- Share Screen --->
+
+    <div class="share-slide" id="share-slide">
+          <img src="close icon.png" class="close-icon" onclick="closeTheShare()" >
+          <div class="share-slide-share-icons">
+              <h2 class="share-headline">SHARE MY CARD</h2>
+              <div class="icon-grid">
+                  <a href="#" ><img src="sms.png"></a>
+                  <a href="#"><img src="cs.png"></a>
+                  <a href="#"><img src="whatsapp.png"></a>
+                  <a href="#"><img src="dropbox 187.png"></a>
+                  <a href="#"><img src="fb9.png"></a>
+                  <a href="#"><img src="telegram 191.png"></a>
+                  <a href="#"><img src="twitter8.png"></a>
+                  <a href="#"><img src="linkedin3.png"></a>
+              </div>
+              <h2 class="scan-and-save-txt" >SCAN AND SAVE</h2>
+              <div class="qr-code-container">
+                  <img src="qr.png">
+              </div>
+          </div>
+      </div>
+      
+
+
+    
+    <!-- --->
       <div class="swiper-container">
-        
-        
         <div class="swiper-wrapper">
           <div class="swiper-slide slide-01 noSwipingClass" id="s1">
             <div class="my-wrapper">
-                <img src="share.png" class="share"/>  
+                <img src="share.png" class="share" onclick="openTheShare()"/>  
                 <div class="my-container">
                    <div class="navbar">
    
@@ -624,7 +762,7 @@ body {
 
   var myAnimation = new hoverEffect({
     parent: document.querySelector(".background"),
-    intensity: 0.3,
+    intensity: 0.5,
     imagesRatio: window.innerWidth / window.innerHeight,
     image1: `${bgImgs[0]}`,
     image2: `${bgImgs[1]}`,
@@ -710,16 +848,17 @@ body {
 
 
   const t1 = new TimelineLite({paused:true});
+  const opShare = new TimelineLite({paused:true});
+  const clShare = new TimelineLite({paused:true});
 
         t1.fromTo('.background',2,{
                 scale: 1.2,
-                
                 ease: Power2.easeOut,
             },{
                
                 scale: 1,
             })
-        
+          
           .fromTo('.prev-icon',1,{
                 autoAlpha: 0, 
                 display:'none',
@@ -741,17 +880,50 @@ body {
                 autoAlpha: 1, 
                 display:'block',
             },'-= 1.2')
-           
+
+
+          /* opShare.fromTo('.share-slide',1,{
+                x: -500, 
+                ease: Power2.easeOut,
+            },{
+               x: 0,
+            },'0.5')
+
+            clShare.fromTo('.share-slide',1,{
+                x: 0, 
+                ease: Power2.easeOut,
+            },{
+               x: -500,
+            }) */
+            
+            
+           t1.play(0);
 
 
 
 
-        t1.play(0);
+       
 
 
         swiper.on('slideChange', function(e){
           t1.play(0);
           })
+
+        
+   
+       
+        
+        function openTheShare()
+        { 
+          $(".share-slide").addClass("open");
+        }
+
+     
+          
+        function closeTheShare()
+        {
+          $(".share-slide").removeClass("open");
+        }
 
  
 
