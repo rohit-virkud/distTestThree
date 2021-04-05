@@ -937,7 +937,7 @@ body {
                
                 scale: 1,
             })
-          .fromTo('.prev-icon',1,{
+          .fromTo('.prev-icon',0.4,{
                 autoAlpha: 0, 
                 display:'none',
                 opacity: 0,
@@ -947,8 +947,8 @@ body {
                 autoAlpha: 1, 
                 display:'block',
                 opacity: 1,
-            },'-= 2')
-          .fromTo('.next-icon',1,{
+            })
+          .fromTo('.next-icon',0.4,{
                 opacity: 0,
                 autoAlpha: 0, 
                 display:'none',
@@ -957,7 +957,7 @@ body {
                 opacity: 1,
                 autoAlpha: 1, 
                 display:'block',
-            },'-= 2')
+            },'-= 0.5')
 
 
          
