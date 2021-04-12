@@ -28,7 +28,8 @@
    .slider
    {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    overflow: hidden;
     
     
    }
@@ -1642,8 +1643,7 @@ canvas img { background-size: cover;  }
             },
             });
 
-
-            const t1 = new TimelineLite({paused:true});
+      const t1 = new TimelineLite({paused:true});
 
 t1.fromTo('.rgbKineticSlider',5,{
         scale: 1.3,
@@ -1688,8 +1688,7 @@ t1.play(0);
  swiper.on('slideChange', function(e){
    
    t1.play(0);
-  })      
-
+  })     
 
 
 
